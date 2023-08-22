@@ -3,11 +3,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GeekShopping.Web.Controllers
 {
-    public class PrroductController : Controller
+    public class ProductController : Controller
     {
         private readonly IProductService _productService;
 
-        public PrroductController(IProductService productService)
+        public ProductController(IProductService productService)
         {
             _productService = productService ?? throw new ArgumentNullException(nameof(productService));
         }
