@@ -8,9 +8,9 @@ builder.Services.AddRazorPages();
 
 var app = builder.Build();
 
-builder.Services.AddHttpClient<IProductService, ProductService>(c =>
-    c.BaseAddress = new Uri(builder.Configuration["ServiceUrls:ProductAPI"])
-    );
+builder.Services.AddHttpClient<IProductService, ProductService>(
+    c => c.BaseAddress = new Uri(builder.Configuration["ServiceUrls:ProductAPI"])
+);
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -23,8 +23,6 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+app.MapRazorPages();
 
 app.Run();
