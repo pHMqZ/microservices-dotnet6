@@ -14,7 +14,7 @@ namespace GeekShopping.Web.Services
             return await response.ReadContentAs<List<ProductModel>>();
         }
 
-        public async Task<IEnumerable<ProductModel>> FindProductById(long id)
+        public async Task<ProductModel> FindProductById(long id)
         {
             var response = await _client.GetAsync($"{BasePath}/{id}");
             return await response.ReadContentAs<ProductModel>();
