@@ -42,6 +42,7 @@ namespace GeekShopping.ProductAPI.Controllers
         }
 
         [HttpPut]
+
         public async Task<ActionResult<ProductVO>> Update([FromBody] ProductVO product)
         {
             if (product == null) return BadRequest();
