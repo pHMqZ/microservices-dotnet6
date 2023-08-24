@@ -1,7 +1,15 @@
+using GeekShopping.Web.Services;
+using GeekShopping.Web.Services.IServices;
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddHttpClient<IProductService, ProductService>(
+    c => c.BaseAddress = new Uri(builder.Configuration["ServiceUrls:ProductAPI"])
+);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
 
 var app = builder.Build();
 
@@ -17,7 +25,7 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapControllerRoute(
-    name: "default",
+    name:"default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();

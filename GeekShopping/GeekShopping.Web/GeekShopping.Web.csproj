@@ -2,12 +2,17 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
   
    <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.0-preview.6.21355.2" />
   </ItemGroup>
+  
+   <ItemGroup>
+     <Folder Include="wwwroot\images\" />
+   </ItemGroup>
+
 
 </Project>
