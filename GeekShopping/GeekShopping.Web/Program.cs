@@ -19,7 +19,7 @@ builder.Services.AddAuthentication(options =>
     options.DefaultScheme = "Cookies";
     options.DefaultChallengeScheme = "oidc";
 })
-    .AddCookie("Cookkies", c =>
+    .AddCookie("Cookies", c =>
     {
         c.ExpireTimeSpan = TimeSpan.FromMinutes(10);
         c.LoginPath = "/Home";
