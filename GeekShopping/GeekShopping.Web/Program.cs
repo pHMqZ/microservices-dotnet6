@@ -1,8 +1,11 @@
 using GeekShopping.Web.Services;
 using GeekShopping.Web.Services.IServices;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.IdentityModel.Logging;
 
 var builder = WebApplication.CreateBuilder(args);
+
+IdentityModelEventSource.ShowPII = true;
 
 builder.Services.AddHttpClient<IProductService, ProductService>(
     c => c.BaseAddress = new Uri(builder.Configuration["ServiceUrls:ProductAPI"])
@@ -16,7 +19,11 @@ builder.Services.AddAuthentication(options =>
     options.DefaultScheme = "Cookies";
     options.DefaultChallengeScheme = "oidc";
 })
-    .AddCookie("Cookkies", c => c.ExpireTimeSpan = TimeSpan.FromMinutes(10))
+    .AddCookie("Cookkies", c =>
+    {
+        c.ExpireTimeSpan = TimeSpan.FromMinutes(10);
+        c.LoginPath = "/Home";
+        })
     .AddOpenIdConnect("oidc", options =>
     {
         options.Authority = builder.Configuration["ServiceUrls:IdentityServer"];
@@ -39,7 +46,9 @@ if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
 }
+
 app.UseHttpsRedirection();
+
 app.UseStaticFiles();
 
 app.UseRouting();
@@ -49,7 +58,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
-    name:"default",
+    name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
