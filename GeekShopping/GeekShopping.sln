@@ -9,7 +9,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{F7
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekShopping.Web", "GeekShopping.Web\GeekShopping.Web.csproj", "{F35572BC-62AC-44D2-83A3-3B6F8DABFD80}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekShopping.ProductAPI", "GeekShopping.ProductAPI\GeekShopping.ProductAPI.csproj", "{D2F63602-A090-4C6B-8A3B-1EBB07E45059}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekShopping.ProductAPI", "GeekShopping.ProductAPI\GeekShopping.ProductAPI.csproj", "{D2F63602-A090-4C6B-8A3B-1EBB07E45059}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekShopping.IdentityServer", "GeekShopping.IdentityServer\GeekShopping.IdentityServer.csproj", "{6758CDD2-854B-4EF4-A065-81ACE531323D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,6 +27,10 @@ Global
 		{D2F63602-A090-4C6B-8A3B-1EBB07E45059}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D2F63602-A090-4C6B-8A3B-1EBB07E45059}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D2F63602-A090-4C6B-8A3B-1EBB07E45059}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6758CDD2-854B-4EF4-A065-81ACE531323D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6758CDD2-854B-4EF4-A065-81ACE531323D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6758CDD2-854B-4EF4-A065-81ACE531323D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6758CDD2-854B-4EF4-A065-81ACE531323D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -32,6 +38,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{F35572BC-62AC-44D2-83A3-3B6F8DABFD80} = {75C2F4CC-C3E0-4C8C-A62F-2AB24F977CEB}
 		{D2F63602-A090-4C6B-8A3B-1EBB07E45059} = {F78047BA-296F-4AC2-87DF-6C3219EEFE2F}
+		{6758CDD2-854B-4EF4-A065-81ACE531323D} = {F78047BA-296F-4AC2-87DF-6C3219EEFE2F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {419A28C3-75DB-48DC-A43A-BF97C0ECD480}
