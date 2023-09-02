@@ -16,6 +16,7 @@ namespace GeekShopping.Web.Controllers
             _productService = productService ?? throw new ArgumentNullException(nameof(productService));
         }
 
+
         [Authorize]
         public async Task<IActionResult> ProductIndex()
         {
@@ -53,6 +54,7 @@ namespace GeekShopping.Web.Controllers
             return NotFound();
         }
 
+
         [Authorize]
         [HttpPost]
         public async Task<IActionResult> ProductUpdate(ProductModel model)
@@ -68,6 +70,7 @@ namespace GeekShopping.Web.Controllers
             return View(model);
         }
 
+
         [Authorize]
         public async Task<IActionResult> ProductDelete(int id)
         {
@@ -77,6 +80,7 @@ namespace GeekShopping.Web.Controllers
 
             return NotFound();
         }
+
         [HttpPost]
         [Authorize(Roles = Role.Admin)]
         public async Task<IActionResult> ProductDelete(ProductModel model)
