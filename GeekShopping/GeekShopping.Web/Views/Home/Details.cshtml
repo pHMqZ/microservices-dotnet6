@@ -1,7 +1,7 @@
 ﻿@model GeekShopping.Web.Models.ProductModel
 
 <form method="post">
-    <input asp-for="Id" hidden/>
+    <input asp-for="Id" hidden />
     <div class="pt-4">
         <div class="card container" style="border: 1px solid #808080;">
             <div class="card-header text-light row" style="border-radius: 0px;">
@@ -13,7 +13,26 @@
                 </div>
             </div>
             <div class="card-body">
-
+                <div>
+                    <div class="col-12 col-lg-4 p-1 text-center">
+                        <img src="@Model.ImageURL" style="border-radius: 35px;" width="100%" class="rounded"/>
+                    </div>
+                    <div class="col-12 col-lg-8">
+                        <div class="row pl-3">
+                           <div class="col-12">
+                               <span class="badge badge-primary text-success p-0 border">
+                                   @Model.CategoryName
+                               </span>
+                               <h3 class="text-success"></h3>
+                               <p class="text-secondary">@Html.Raw(Model.Description)</p>
+                           </div>
+                       </div>
+                        <div class="row plx-4">
+                            <input asp-for="Count" class="form-control"/>
+                            <span asp-validation-for="Count" class="text-danger"></span>
+                        </div>
+                     </div>
+                </div>
             </div>
             <div class="footer row">
                 <div class="col-12 col-md-6 pb-1">
