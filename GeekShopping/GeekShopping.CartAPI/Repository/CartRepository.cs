@@ -70,9 +70,33 @@ namespace GeekShopping.CartAPI.Repository
                 _context.CartDetails.Add(cart.Details.FirstOrDefault());
                 await _context.SaveChangesAsync();
             }
-
-
-
+            else
+            {
+                //If CartHeader is not null
+                //Check if CartDetails has same product
+                var cartDetail = await _context.CartDetails.AsNoTracking().FirstOrDefaultAsync(p =>
+                        p.ProductId == cartVO.Details.FirstOrDefault().ProductId &&
+                        p.CartHeaderId == cartHeader.Id);
+                if(cartDetail == null)
+                {
+                    //Create CartDetails
+                    cart.Details.FirstOrDefault().CartHeaderId = cart.CartHeader.Id;
+                    cart.Details.FirstOrDefault().Product = null;
+                    _context.CartDetails.Add(cart.Details.FirstOrDefault());
+                    await _context.SaveChangesAsync();
+                }
+                else
+                {
+                    //Update product count and CartDetails
+                    cart.Details.FirstOrDefault().Product = null;
+                    cart.Details.FirstOrDefault().Count += cartDetail.Count;
+                    cart.Details.FirstOrDefault().Id = cartDetail.Id;
+                    cart.Details.FirstOrDefault().CartHeaderId = cartDetail.CartHeaderId;
+                    _context.CartDetails.Update(cart.Details.FirstOrDefault());
+                    await _context.SaveChangesAsync();
+                }
+            }
+            return _mapper.Map<CartVO>(cart);
 
             throw new NotImplementedException();
         }
