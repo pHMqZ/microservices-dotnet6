@@ -12,7 +12,7 @@ namespace GeekShopping.Web.Utils
             this HttpResponseMessage response)
         {
             if (!response.IsSuccessStatusCode) throw
-                    new ApplicationException($"Something wnet wrong caling the API: " +
+                    new ApplicationException($"Something went wrong calling the API: " +
                     $"{response.ReasonPhrase}");
 
             var dataAsString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
