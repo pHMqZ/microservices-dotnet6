@@ -29,7 +29,7 @@ namespace GeekShopping.CartAPI.Repository
             if(cartHeader != null)
             {
                 _context.CartDetails.RemoveRange(_context.CartDetails
-                        .Where(c=> c.CartHeaderId == cartHeader.Id));
+                        .Where(c => c.CartHeaderId == cartHeader.Id));
                 _context.CartHeaders.Remove(cartHeader);
                 await _context.SaveChangesAsync();
                 return true;
@@ -42,11 +42,11 @@ namespace GeekShopping.CartAPI.Repository
             Cart cart = new()
             {
                 CartHeader = await _context.CartHeaders
-                .FirstOrDefaultAsync(c => c.UserId == userId),
+                    .FirstOrDefaultAsync(c => c.UserId == userId),
             };
-            cart.Details = _context.CartDetails
-                .Where(c => c.CartHeaderId == cart.CartHeader.Id)
-                    .Include(c => c.Product);
+            cart.CartDetails = _context.CartDetails
+                   .Where(c => c.CartHeaderId == cart.CartHeader.Id)
+                        .Include(c => c.Product);
             return _mapper.Map<CartVO>(cart);
         }
 
@@ -85,14 +85,13 @@ namespace GeekShopping.CartAPI.Repository
         public async Task<CartVO> SaveOrUpdateCart(CartVO cartVO)
         {
             Cart cart = _mapper.Map<Cart>(cartVO);
-            
-            //Check if the product is already saved in the database if it does not exist the save
-            var product = await _context.Products.FirstOrDefaultAsync(p =>
-                p.Id == cartVO.Details.FirstOrDefault().ProductId);
+            //Checks if the product is already saved in the database if it does not exist then save
+            var product = await _context.Products.FirstOrDefaultAsync(
+                p => p.Id == cartVO.CartDetails.FirstOrDefault().ProductId);
             
             if (product == null)
             {
-                _context.Products.Add(cart.Details.FirstOrDefault().Product);
+                _context.Products.Add(cart.CartDetails.FirstOrDefault().Product);
                 await _context.SaveChangesAsync();
             }
 
@@ -104,35 +103,35 @@ namespace GeekShopping.CartAPI.Repository
                 //Create CartHeader and CartDetails
                 _context.CartHeaders.Add(cart.CartHeader);
                 await _context.SaveChangesAsync();
-
-                cart.Details.FirstOrDefault().CartHeaderId = cart.CartHeader.Id;
-                cart.Details.FirstOrDefault().Product = null;
-                _context.CartDetails.Add(cart.Details.FirstOrDefault());
+                cart.CartDetails.FirstOrDefault().CartHeaderId = cart.CartHeader.Id;
+                cart.CartDetails.FirstOrDefault().Product = null;
+                _context.CartDetails.Add(cart.CartDetails.FirstOrDefault());
                 await _context.SaveChangesAsync();
             }
             else
             {
                 //If CartHeader is not null
                 //Check if CartDetails has same product
-                var cartDetail = await _context.CartDetails.AsNoTracking().FirstOrDefaultAsync(p =>
-                        p.ProductId == cart.Details.FirstOrDefault().ProductId &&
-                        p.CartHeaderId == cartHeader.Id);
-                if(cartDetail == null)
+                var cartDetail = await _context.CartDetails.AsNoTracking().FirstOrDefaultAsync(
+                    p => p.ProductId == cart.CartDetails.FirstOrDefault().ProductId &&
+                    p.CartHeaderId == cartHeader.Id);
+
+                if (cartDetail == null)
                 {
                     //Create CartDetails
-                    cart.Details.FirstOrDefault().CartHeaderId = cartHeader.Id;
-                    cart.Details.FirstOrDefault().Product = null;
-                    _context.CartDetails.Add(cart.Details.FirstOrDefault());
+                    cart.CartDetails.FirstOrDefault().CartHeaderId = cartHeader.Id;
+                    cart.CartDetails.FirstOrDefault().Product = null;
+                    _context.CartDetails.Add(cart.CartDetails.FirstOrDefault());
                     await _context.SaveChangesAsync();
                 }
                 else
                 {
                     //Update product count and CartDetails
-                    cart.Details.FirstOrDefault().Product = null;
-                    cart.Details.FirstOrDefault().Count += cartDetail.Count;
-                    cart.Details.FirstOrDefault().Id = cartDetail.Id;
-                    cart.Details.FirstOrDefault().CartHeaderId = cartDetail.CartHeaderId;
-                    _context.CartDetails.Update(cart.Details.FirstOrDefault());
+                    cart.CartDetails.FirstOrDefault().Product = null;
+                    cart.CartDetails.FirstOrDefault().Count += cartDetail.Count;
+                    cart.CartDetails.FirstOrDefault().Id = cartDetail.Id;
+                    cart.CartDetails.FirstOrDefault().CartHeaderId = cartDetail.CartHeaderId;
+                    _context.CartDetails.Update(cart.CartDetails.FirstOrDefault());
                     await _context.SaveChangesAsync();
                 }
             }
