@@ -76,7 +76,6 @@ namespace GeekShopping.CartAPI.Repository
                     .Include(c => c.Product);
             return _mapper.Map<CartVO>(cart);
         }
-
         
         public async Task<bool> RemoveFromCart(long cartDetailsId)
         {
@@ -119,7 +118,6 @@ namespace GeekShopping.CartAPI.Repository
             }
 
             //Check if CartHeader is null
-
             var cartHeader = await _context.CartHeaders.AsNoTracking().FirstOrDefaultAsync(
                 c => c.UserId == cart.CartHeader.UserId);
 
