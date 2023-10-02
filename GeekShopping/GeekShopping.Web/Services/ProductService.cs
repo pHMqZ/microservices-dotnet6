@@ -29,6 +29,7 @@ namespace GeekShopping.Web.Services
             var response = await _client.GetAsync($"{BasePath}/{id}");
             return await response.ReadContentAs<ProductViewModel>();
         }
+
         public async Task<ProductViewModel> CreateProduct(ProductViewModel product, string token)
         {
             _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
