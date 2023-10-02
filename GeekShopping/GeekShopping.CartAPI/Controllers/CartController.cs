@@ -69,5 +69,13 @@ namespace GeekShopping.CartAPI.Controllers
             if (!status) return NotFound();
             return Ok(status);
         }
+
+        [HttpPost("checkout")]
+        public async Task<ActionResult<CartVO>> Checkout()
+        {
+            var status = await _repository.RemoveCoupon(userId);
+            if (!status) return NotFound();
+            return Ok(status);
+        }
     }
 }
