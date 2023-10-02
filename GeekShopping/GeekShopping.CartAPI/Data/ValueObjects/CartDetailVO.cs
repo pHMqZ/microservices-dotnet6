@@ -2,7 +2,6 @@
 
 namespace GeekShopping.CartAPI.Data.ValueObjects
 {
-    [Table("cart_detail")]
     public class CartDetailVO
     {
         public long Id {  get; set; }

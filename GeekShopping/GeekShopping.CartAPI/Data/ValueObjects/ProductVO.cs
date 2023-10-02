@@ -1,8 +1,5 @@
-namespace GeekShopping.CartAPI.Data.ValueObjects
-========
-﻿using System.ComponentModel.DataAnnotations;
 
-namespace GeekShopping.CartAPI.Data.ValueObjects
+﻿namespace GeekShopping.CartAPI.Data.ValueObjects
 {
 
     public class ProductVO
@@ -13,6 +10,5 @@ namespace GeekShopping.CartAPI.Data.ValueObjects
         public string Description { get; set; }
         public string CategoryName { get; set; }
         public string ImageURL { get; set; }
-
     }
 }
