@@ -1,3 +1,4 @@
+
 ﻿namespace GeekShopping.CartAPI.Data.ValueObjects
 {
 
