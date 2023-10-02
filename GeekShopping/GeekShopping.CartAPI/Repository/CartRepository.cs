@@ -100,7 +100,6 @@ namespace GeekShopping.CartAPI.Repository
             }
 
             //Check if CartHeader is null
-
             var cartHeader = await _context.CartHeaders.AsNoTracking().FirstOrDefaultAsync(
                 c => c.UserId == cart.CartHeader.UserId);
 
@@ -109,6 +108,7 @@ namespace GeekShopping.CartAPI.Repository
                 //Create CartHeader and CartDetails
                 _context.CartHeaders.Add(cart.CartHeader);
                 await _context.SaveChangesAsync();
+
                 cart.CartDetails.FirstOrDefault().CartHeaderId = cart.CartHeader.Id;
                 cart.CartDetails.FirstOrDefault().Product = null;
                 _context.CartDetails.Add(cart.CartDetails.FirstOrDefault());
@@ -145,3 +145,4 @@ namespace GeekShopping.CartAPI.Repository
         }
     }
 }
+
