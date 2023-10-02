@@ -22,6 +22,6 @@ namespace GeekShopping.CartAPI.Messages
 
         public int CartTotalItens { get; set; }
 
-        public IEnumerable<CartDetailVO> CartDetais { get; set; }
+        public IEnumerable<CartDetailVO> CartDetails { get; set; }
     }
 }
