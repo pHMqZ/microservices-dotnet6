@@ -3,6 +3,11 @@ using GeekShopping.Web.Services.IServices;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace GeekShopping.Web.Controllers
 {
@@ -21,10 +26,22 @@ namespace GeekShopping.Web.Controllers
         [Authorize]
         public async Task<IActionResult> CartIndex()
         {
-
             return View(await FindUserCart());
         }
 
+        public async Task<IActionResult> Remove(int id)
+        {
+            var token = await HttpContext.GetTokenAsync("access_token");
+            var userId = User.Claims.Where(u => u.Type == "sub")?.FirstOrDefault()?.Value;
+
+            var response = await _cartService.RemoveFromCart(id, token);
+
+            if (response)
+            {
+                return RedirectToAction(nameof(CartIndex));
+            }
+            return View();
+        }
 
         private async Task<CartViewModel> FindUserCart()
         {
@@ -32,6 +49,7 @@ namespace GeekShopping.Web.Controllers
             var userId = User.Claims.Where(u => u.Type == "sub")?.FirstOrDefault()?.Value;
 
             var response = await _cartService.FindCartByUserId(userId, token);
+
             if (response?.CartHeader != null)
             {
                 foreach (var detail in response.CartDetails)
@@ -39,7 +57,6 @@ namespace GeekShopping.Web.Controllers
                     response.CartHeader.PurchaseAmount += (detail.Product.Price * detail.Count);
                 }
             }
-
             return response;
         }
     }
