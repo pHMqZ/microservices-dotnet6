@@ -48,9 +48,7 @@ namespace GeekShopping.CartAPI.RabbitMQSender
             };
 
             var json = JsonSerializer.Serialize<CheckoutHeaderVO>((CheckoutHeaderVO)message, options);
-
             var body = Encoding.UTF8.GetBytes(json);
-
             return body;
         }
     }
