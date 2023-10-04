@@ -1,4 +1,6 @@
-﻿using GeekShopping.CartAPI.Data.ValueObjects;
+﻿using GeekShopping.CartAPI.RabbitMQSender;
+using GeekShopping.CartAPI.Repository;
+using GeekShopping.CartAPI.Data.ValueObjects;
 using GeekShopping.CartAPI.Messages;
 using GeekShopping.CartAPI.RabbitMQSender;
 using GeekShopping.CartAPI.Repository;

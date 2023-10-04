@@ -17,6 +17,5 @@ namespace GeekShopping.CartAPI.Model
         public virtual Product Product { get; set; }
 
         [Column("count")]
-        public int Count { get; set; }
-    }
+        public int Count { get; set; }  }
 }
