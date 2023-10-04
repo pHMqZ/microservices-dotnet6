@@ -1,7 +1,7 @@
-﻿using GeekShopping.CartAPI.Model.Base;
+﻿using GeekShopping.OrderAPI.Model.Base;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace GeekShopping.CartAPI.Data.ValueObjects
+namespace GeekShopping.OrderAPI.Data.ValueObjects
 {
     public class CartHeaderVO
     {

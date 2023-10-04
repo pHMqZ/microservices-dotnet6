@@ -1,11 +1,17 @@
-﻿using GeekShopping.OrderAPI.Data.ValueObjects;
-using GeekShopping.MessageBus;
+﻿using GeekShopping.OrderAPI.Model.Base;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace GeekShopping.OrderAPI.Messages
+namespace GeekShopping.OrderAPI.Model
 {
-    public class CheckoutHeaderVO : BaseMessage
+    [Table("order_header")]
+    public class OrderHeader : BaseEntity
     {
+        [Column("user_id")]
         public string UserId { get; set; }
+
+        [Column("coupon_code")]
+        public string? CouponCode { get; set; }
+
         public string CouponCode { get; set; }
         public decimal PurchaseAmount { get; set; }
 
@@ -22,6 +28,6 @@ namespace GeekShopping.OrderAPI.Messages
 
         public int CartTotalItens { get; set; }
 
-        public IEnumerable<CartDetailVO> CartDetails { get; set; }
+        public IEnumerable<OrderDetail> CartDetails { get; set; }
     }
 }

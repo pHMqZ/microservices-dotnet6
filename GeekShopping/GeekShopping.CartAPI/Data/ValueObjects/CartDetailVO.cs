@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace GeekShopping.CartAPI.Data.ValueObjects
+namespace GeekShopping.OrderAPI.Data.ValueObjects
 {
 
     public class CartDetailVO
