@@ -1,13 +1,13 @@
 ﻿using AutoMapper;
-using GeekShopping.OrderAPI.Data.ValueObjects;
-using GeekShopping.OrderAPI.Model;
-using GeekShopping.OrderAPI.Model.Context;
+using GeekShopping.CartAPI.Data.ValueObjects;
+using GeekShopping.CartAPI.Model;
+using GeekShopping.CartAPI.Model.Context;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace GeekShopping.OrderAPI.Repository
+namespace GeekShopping.CartAPI.Repository
 {
     public class CartRepository : ICartRepository
     {

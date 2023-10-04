@@ -1,7 +1,9 @@
-﻿using GeekShopping.OrderAPI.Data.ValueObjects;
-using GeekShopping.OrderAPI.Messages;
-using GeekShopping.OrderAPI.RabbitMQSender;
-using GeekShopping.OrderAPI.Repository;
+﻿using GeekShopping.CartAPI.RabbitMQSender;
+using GeekShopping.CartAPI.Repository;
+using GeekShopping.CartAPI.Data.ValueObjects;
+using GeekShopping.CartAPI.Messages;
+using GeekShopping.CartAPI.RabbitMQSender;
+using GeekShopping.CartAPI.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -10,7 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace GeekShopping.OrderAPI.Controllers
+namespace GeekShopping.CartAPI.Controllers
 {
     [ApiController]
     [Route("api/v1/[controller]")]

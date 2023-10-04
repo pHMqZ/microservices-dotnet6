@@ -1,10 +1,10 @@
-﻿using GeekShopping.OrderAPI.Messages;
+﻿using GeekShopping.CartAPI.Messages;
 using GeekShopping.MessageBus;
 using RabbitMQ.Client;
 using System.Text;
 using System.Text.Json;
 
-namespace GeekShopping.OrderAPI.RabbitMQSender
+namespace GeekShopping.CartAPI.RabbitMQSender
 {
     public class RabbitMQMessageSender : IRabbitMQMessageSender
     {
