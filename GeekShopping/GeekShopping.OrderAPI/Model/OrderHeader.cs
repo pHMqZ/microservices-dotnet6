@@ -50,7 +50,7 @@ namespace GeekShopping.OrderAPI.Model
 
         [Column("coupon_code")]
 
-        public IEnumerable<OrderDetail> CartDetails { get; set; }
+        public List<OrderDetail> OrderDetails { get; set; }
 
         [Column("payment_status")]
         public bool PaymentStatus { get; set; }
