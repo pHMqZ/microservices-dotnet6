@@ -8,13 +8,13 @@ using System.Text.Json;
 
 namespace GeekShopping.OrderAPI.MessageConsumer
 {
-    public class RabbitMQMessageConsumer : BackgroundService
+    public class RabbitMQCheckoutConsumer : BackgroundService
     {
         private readonly OrderRepository _repository;
         private IConnection _connection;
         private IModel _chanel;
 
-        public RabbitMQMessageConsumer(OrderRepository repository)
+        public RabbitMQCheckoutConsumer(OrderRepository repository)
         {
             _repository = repository;
             var factory = new ConnectionFactory
@@ -61,6 +61,7 @@ namespace GeekShopping.OrderAPI.MessageConsumer
                 Email = vo.Email,
                 ExpiryMonthYear = vo.ExpiryMonthYear,
                 OrderTime = DateTime.Now,
+                PurchaseAmount = vo.PurchaseAmount,
                 PaymentStatus = false,
                 Phone = vo.Phone,
                 DateTime = vo.DateTime,
