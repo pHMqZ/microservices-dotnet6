@@ -10,9 +10,13 @@ namespace GeekShopping.CartAPI.Repository
     public class CouponRepository : ICouponRepository
     {
         private readonly HttpClient _client;
-        
 
-        public async Task<CouponVO> GetCouponByCouponCode(string couponCode, string token)
+        public CouponRepository(HttpClient client)
+        {
+            _client = client;
+        }
+
+        public async Task<CouponVO> GetCoupon(string couponCode, string token)
         {
            
 
