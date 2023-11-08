@@ -1,3 +1,4 @@
+using GeekShopping.GeekShopping.OrderAPI.RabbitMQSender;
 using GeekShopping.OrderAPI.MessageConsumer;
 using GeekShopping.OrderAPI.Model.Context;
 using GeekShopping.OrderAPI.RabbitMQSender;
@@ -27,7 +28,7 @@ builder.Services.AddSingleton(new OrderRepository(dbContextBuilder.Options));
 
 builder.Services.AddHostedService<RabbitMQCheckoutConsumer>();
 
-builder.Services.AddSingleton<IRabbitMQMessageSender, IRabbitMQMessageSender>();
+builder.Services.AddSingleton<IRabbitMQMessageSender, RabbitMQMessageSender>();
 
 builder.Services.AddControllers();
 
