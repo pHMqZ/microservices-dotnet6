@@ -104,7 +104,7 @@ namespace GeekShopping.CartAPI.Controllers
             _rabbitMQMessageSender.SendMessage(vo, "CheckoutQueue");
 
 
-            await _repository.ClearCart(vo.UserId);
+            await _cartRepository.ClearCart(vo.UserId);
 
 
             return Ok(vo);
