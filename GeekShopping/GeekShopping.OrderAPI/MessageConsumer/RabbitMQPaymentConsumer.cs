@@ -6,6 +6,7 @@ using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System.Text;
 using System.Text.Json;
+using System.Threading.Channels;
 
 namespace GeekShopping.OrderAPI.MessageConsumer
 {
@@ -13,9 +14,9 @@ namespace GeekShopping.OrderAPI.MessageConsumer
     {
         private readonly OrderRepository _repository;
         private IConnection _connection;
-        private IModel _chanel;
-        private const string ExchangeName = "FanoutPaymentUpdateExchange";
-        string queueName = "";
+        private IModel _channel;
+        private const string ExchangeName = "DirectPaymentUpdateExchange";
+        private const string PaymentOrderUpdateQueueName = "PaymentOrderUpdateQueueName";
 
         public RabbitMQPaymentConsumer(OrderRepository repository)
         {
@@ -29,26 +30,26 @@ namespace GeekShopping.OrderAPI.MessageConsumer
             };
 
             _connection = factory.CreateConnection();
-            _chanel = _connection.CreateModel();
-            _chanel.ExchangeDeclare(ExchangeName, ExchangeType.Fanout);
+            _channel = _connection.CreateModel();
 
-            queueName = _chanel.QueueDeclare().QueueName;
-            _chanel.QueueBind(queueName, ExchangeName, "");
+            _channel.ExchangeDeclare(ExchangeName, ExchangeType.Direct);
+            _channel.QueueDeclare(PaymentOrderUpdateQueueName, false, false, false, null);
+            _channel.QueueBind(PaymentOrderUpdateQueueName, ExchangeName, "PaymentOrder");
         }
 
         protected override Task ExecuteAsync(CancellationToken stoppingToken)
         {
             stoppingToken.ThrowIfCancellationRequested();
 
-            var consumer = new EventingBasicConsumer(_chanel);
+            var consumer = new EventingBasicConsumer(_channel);
             consumer.Received += (chanel, evt) =>
             {
                 var content = Encoding.UTF8.GetString(evt.Body.ToArray());
                 UpdatePaymentResultVO vo = JsonSerializer.Deserialize<UpdatePaymentResultVO>(content);
                 UpdatePaymentStatus(vo).GetAwaiter().GetResult();
-                _chanel.BasicAck(evt.DeliveryTag, false);
+                _channel.BasicAck(evt.DeliveryTag, false);
             };
-            _chanel.BasicConsume(queueName, false, consumer);
+            _channel.BasicConsume(PaymentOrderUpdateQueueName, false, consumer);
 
             return Task.CompletedTask;
         }
