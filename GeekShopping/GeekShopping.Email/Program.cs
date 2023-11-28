@@ -1,3 +1,4 @@
+using GeekShopping.Email.MessageConsumer;
 using GeekShopping.Email.Model.Context;
 using GeekShopping.Email.Repository;
 using Microsoft.EntityFrameworkCore;
@@ -24,7 +25,7 @@ dbContextBuilder.UseMySql(
 builder.Services.AddSingleton(new EmailRepository(dbContextBuilder.Options));
 
 builder.Services.AddScoped<IEmailRepository, EmailRepository>();
-
+builder.Services.AddHostedService<RabbitMQPaymentConsumer>();
 
 builder.Services.AddControllers();
 
